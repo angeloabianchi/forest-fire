@@ -1,7 +1,5 @@
-/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?where=posicion%20is%20not%20null&limit=10&offset=0&timezone=UTC&include_links=false&include_app_metas=false */
-/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?select=envelope%28posicion%29&where=posicion%20is%20not%20null&limit=10&offset=0&timezone=UTC&include_links=false&include_app_metas=false */
-/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?limit=10&exclude=provincia%3ABURGOS&timezone=UTC&include_links=false&include_app_metas=false */
-
+// This module handles data fetching from an external API.
+// It constructs the URL for the API request and fetches the data.
 
 const generateURL = (group, limit, selectedFilter) => {
     const baseURL = 'https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?';
@@ -28,7 +26,11 @@ const generateURL = (group, limit, selectedFilter) => {
     return url;
 }
 
-
+    // Fetch data from an external API based on the provided parameters.
+    // group: Grouping parameter for data retrieval (null for no grouping).
+    // limit: The maximum number of records to fetch.
+    // selectedFilter: An array of selected filters for data refinement.
+    // Returns the fetched data as an array.
 const GetData = async (group, limit, selectedFilter) => {
 
     const fetch = require('node-fetch'); 

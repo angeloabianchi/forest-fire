@@ -1,3 +1,6 @@
+// This is the main React component for the application.
+// It manages the state and rendering of the application.
+
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';

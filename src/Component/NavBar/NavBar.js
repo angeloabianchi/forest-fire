@@ -1,3 +1,6 @@
+// This component displays the navigation bar and filter options.
+// It handles user interactions with checkboxes and tab switching.
+
 import React from 'react';
 import './NavBar.css';
 
@@ -5,7 +8,7 @@ import './NavBar.css';
 const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituations, probableCauses, provincias, activeTab, setActiveTab}) => {
 
 
-
+    // Add or remove the selected filter based on the checkbox state.
     const handleCheckboxChange = (selectedCheckbox) => {
         const existingFilterIndex = selectedFilters.findIndex(filter => filter.selectedCheckbox === selectedCheckbox);
     

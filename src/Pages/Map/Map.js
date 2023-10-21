@@ -1,3 +1,5 @@
+// This component embeds a map for displaying fire incident data.
+
 import React from 'react';
 
 const Map = () => {

@@ -1,3 +1,6 @@
+// This component displays a table of fire incident data.
+// It fetches and updates the data based on selected filters.
+
 import React, { useState, useEffect } from 'react';
 import './Table.css';
 import { GetData } from '../../Component/GetData/GetData';
