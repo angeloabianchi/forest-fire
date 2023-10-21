@@ -4,6 +4,7 @@ This is a React application that displays data related to forest fires.
 
 ## Project Directory Structure
 
+<!-- 
 my-react-app/
 │
 ├── src/
@@ -33,6 +34,7 @@ my-react-app/
 ├── package.json
 ├── README.md
 ├── ...
+ -->
 
 ## Getting Started
 
