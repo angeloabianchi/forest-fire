@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import NavBar from './Component/NavBar/NavBar';
 import Table from './Pages/Table/Table';
+import Map from './Pages/Map/Map';
 import { GetData } from './Component/GetData/GetData';
 
 
@@ -15,7 +16,8 @@ const App = () => {
   const [probableCauses, setProbableCauses] = useState();
   const [provincias, setProvincias] = useState();
   const group_by = ['causa_probable', 'provincia', 'situacion_actual', 'nivel_maximo_alcanzado'];
-
+  const [activeTab, setActiveTab] = useState('Table');
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
     const getNavData = async () => {
@@ -28,7 +30,6 @@ const App = () => {
                 console.error(`Error fetching ${group} data:`, error);
             }
         }
-
         setProbableCauses(newData['causa_probable']);
         setProvincias(newData['provincia']);
         setCurrentlySituations(newData['situacion_actual']);
@@ -37,7 +38,16 @@ const App = () => {
 
     getNavData();
 
-}, [])
+    setAnimate(true);
+    // Clear the animation class after the animation duration (1s)
+    const timeoutId = setTimeout(() => {
+      setAnimate(false);
+    }, 1000); // 1000ms = 1s
+
+    // Clean up the timeout to avoid memory leaks
+    return () => clearTimeout(timeoutId);
+
+}, [activeTab])
 
   return(
     <div className="App">
@@ -49,16 +59,22 @@ const App = () => {
           nivels={nivels}
           currentlySituations={currentlySituations}
           probableCauses={probableCauses}
-          provincias={provincias} />
+          provincias={provincias}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          />
         </header>
       </div>
       
       <div className="Content">
         <main>
-          <div>
-            <Table 
-            selectedFilters={selectedFilters} />
-          </div>
+          <div className='container'>
+            {activeTab === 'Map' ? (
+              <div className={animate ? 'display' : ''}><Map /></div>
+            ) : (
+              <div className={animate ? 'display' : ''}><Table selectedFilters={selectedFilters} /></div>
+            )}
+            </div>
         </main>
       </div>
       <div className="footer"> </div>

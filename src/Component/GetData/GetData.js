@@ -1,4 +1,7 @@
-const queryString = require('query-string');
+/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?where=posicion%20is%20not%20null&limit=10&offset=0&timezone=UTC&include_links=false&include_app_metas=false */
+/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?select=envelope%28posicion%29&where=posicion%20is%20not%20null&limit=10&offset=0&timezone=UTC&include_links=false&include_app_metas=false */
+/* https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?limit=10&exclude=provincia%3ABURGOS&timezone=UTC&include_links=false&include_app_metas=false */
+
 
 const generateURL = (group, limit, selectedFilter) => {
     const baseURL = 'https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?';
@@ -15,7 +18,7 @@ const generateURL = (group, limit, selectedFilter) => {
             const key = Object.keys(filters.selectedCheckbox);
             const value = JSON.stringify(Object.values(filters)[0]).slice(1, -1);
             console.log(`value Get Data - ${value}`)
-            const stringValue = value.replace(' ', '%20');
+            const stringValue = value.replaceAll(' ', '%20');
 
             filterStrings.push(stringValue.replace(/"/g, ''));
         }
@@ -25,7 +28,7 @@ const generateURL = (group, limit, selectedFilter) => {
 
         console.log(`filterStrings: ${filterStrings}`)
 
-        url = `${baseURL}limit=${limit}&refine=${filterStrings.join('&')}`;
+        url = `${baseURL}limit=${limit}&refine=${filterStrings.join('&refine=')}`;
     }
 
     console.log(url)

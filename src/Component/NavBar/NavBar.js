@@ -1,7 +1,8 @@
 import React from 'react';
+import './NavBar.css';
 
 
-const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituations, probableCauses, provincias}) => {
+const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituations, probableCauses, provincias, activeTab, setActiveTab}) => {
 
 
 
@@ -18,6 +19,9 @@ const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituatio
         }
     };
 
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+      };
 
 
     return (
@@ -28,7 +32,7 @@ const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituatio
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                    <li class="nav-item dropdown-center">
+                        <li class="nav-item dropdown-center">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Nivel Maximo Alcanzado
                             </a>
@@ -111,6 +115,16 @@ const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituatio
                                 ))}
                             </ul>
                         </li>
+                        <button class="btn btn-danger nav-item">
+                        <a class='nav-link' href="#"
+                            onClick={() => {
+                                if (activeTab === 'Table') {
+                                    handleTabChange('Map')
+                                } else {
+                                    handleTabChange('Table')
+                                }
+                                }}> {activeTab} </a>
+                        </button>
                     </ul>
                 </div>
             </div>

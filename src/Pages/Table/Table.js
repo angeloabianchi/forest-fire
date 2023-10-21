@@ -23,6 +23,7 @@ const Table = ({ selectedFilters }) => {
 
 
     useEffect(() => {
+        console.log(`selectedFilters - ${selectedFilters}`)
 
         fetchData();
 
@@ -55,7 +56,7 @@ const Table = ({ selectedFilters }) => {
 
     return (
         <div class="container-fluid table-responsive ">
-            <table class="table table-hover ">
+            <table class="table table-hover shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                 <thead class="table-dark">
                     <tr class="align-middle">
                         <th scope="col">Fecha del Parte</th>
