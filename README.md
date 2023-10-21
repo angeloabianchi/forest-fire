@@ -32,8 +32,6 @@ To run this application on your local machine, follow these steps:
 
 ## Project Directory Structure
 
-my-react-app/
-
 - my-react-app/
   - src/
     - components/
