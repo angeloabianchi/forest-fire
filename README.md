@@ -33,32 +33,30 @@ To run this application on your local machine, follow these steps:
 ## Project Directory Structure
 
 my-react-app/
-│
-├── src/
-│   ├── components/
-│   │   ├── GetData/
-│   │   │   ├── GetData.js
-│   │   │   └── ...
-│   │   ├── NavBar/
-│   │   │   ├── NavBar.js
-│   │   │   └── ...
-│   │   └── ...
-│   ├── pages/
-│   │   ├── Table/
-│   │   │   ├── Table.js
-│   │   │   └── ...
-│   │   ├── Map/
-│   │   │   ├── Map.js
-│   │   │   └── ...
-│   │   └── ...
-│   ├── App.js
-│   └── ...
-│
-├── public/
-│   ├── index.html
-│   └── ...
-│
-├── package.json
-├── README.md
-├── ...
+
+- my-react-app/
+  - src/
+    - components/
+      - GetData/
+        - GetData.js
+        - ...
+      - NavBar/
+        - NavBar.js
+        - ...
+      - ...
+    - pages/
+      - Table/
+        - Table.js
+        - ...
+      - Map/
+        - Map.js
+        - ...
+      - ...
+    - App.js
+  - public/
+    - index.html
+    - ...
+- package.json
+- README.md
+- ...
 
