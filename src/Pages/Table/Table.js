@@ -23,7 +23,6 @@ const Table = ({ selectedFilters }) => {
 
 
     useEffect(() => {
-        console.log(`selectedFilters - ${selectedFilters}`)
 
         fetchData();
 

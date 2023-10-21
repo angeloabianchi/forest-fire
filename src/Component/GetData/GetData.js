@@ -17,21 +17,13 @@ const generateURL = (group, limit, selectedFilter) => {
         for (const filters of selectedFilter) {
             const key = Object.keys(filters.selectedCheckbox);
             const value = JSON.stringify(Object.values(filters)[0]).slice(1, -1);
-            console.log(`value Get Data - ${value}`)
             const stringValue = value.replaceAll(' ', '%20');
 
             filterStrings.push(stringValue.replace(/"/g, ''));
         }
-        
-        /* console.log(`Key Get Data - ${Object.keys(selectedFilter[0].selectedCheckbox)}`)
-        console.log(`Value Get Data 1 - ${JSON.stringify(Object.values(selectedFilter))}`) */
-
-        console.log(`filterStrings: ${filterStrings}`)
 
         url = `${baseURL}limit=${limit}&refine=${filterStrings.join('&refine=')}`;
     }
-
-    console.log(url)
 
     return url;
 }
