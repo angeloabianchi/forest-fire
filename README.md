@@ -2,6 +2,8 @@
 
 This is a React application that displays data related to forest fires.
 
+[**Live Demo**](https://forest-fire-es.netlify.app/)
+
 ## Getting Started
 
 To run this application on your local machine, follow these steps:
@@ -57,4 +59,6 @@ To run this application on your local machine, follow these steps:
 - package.json
 - README.md
 - ...
+
+
 
