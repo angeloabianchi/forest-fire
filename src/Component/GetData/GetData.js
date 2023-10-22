@@ -1,36 +1,6 @@
 // This module handles data fetching from an external API.
 // It constructs the URL for the API request and fetches the data.
 
-/* const generateURL = (group, limit, selectedFilter) => {
-    const baseURL = 'https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?';
-
-    let url;
-
-    if (group && selectedFilter === null) {
-        url = `${baseURL}group_by=${group}&limit=${limit}&offset=0&timezone=UTC&include_links=false&include_app_metas=false`;
-    } else if (!group && selectedFilter.length === 0) {
-        url = `${baseURL}limit=${limit}`;
-    } else if (selectedFilter.length > 0) {
-        const filterStrings = [];
-        for (const filters of selectedFilter) {
-            const key = Object.keys(filters.selectedCheckbox);
-            const value = JSON.stringify(Object.values(filters)[0]).slice(1, -1);
-            const stringValue = value.replaceAll(' ', '%20');
-
-            filterStrings.push(stringValue.replace(/"/g, ''));
-        }
-
-        console.log(filterStrings);        
-
-        url = `${baseURL}limit=${limit}&refine=${filterStrings.join('&refine=')}`;
-    }
-
-    return url;
-} */
-
-
-
-
 const generateURL = (group, limit, selectedFilter) => {
     const baseURL = 'https://analisis.datosabiertos.jcyl.es/api/explore/v2.1/catalog/datasets/incendios-forestales/records?';
 
@@ -50,22 +20,17 @@ const generateURL = (group, limit, selectedFilter) => {
             const key = Object.keys(filters.selectedCheckbox);
             const values = JSON.stringify(Object.values(filters.selectedCheckbox)).slice(2, -2);
             let stringValues = values.replaceAll(' ', '%20');
-            /* stringValues = stringValues.slice(1, -1); */
-            
-            /* const value = JSON.stringify(Object.values(filters)[0]).slice(1, -1); */
-            /* const stringValue = value.replaceAll(' ', '%20'); */
 
             if (!keyCount[key]) {
                 keyCount[key] = 1;
                 andOrOr = 'AND';
             } else {
                 keyCount[key]++;
-                andOrOr = keyCount[key] % 2 === 0 ? 'OR' : 'AND'; // Toggle between 'AND' and 'OR'
+                andOrOr = keyCount[key] % 2 === 0 ? 'OR' : 'AND';
             }
 
 
             console.log(`filters.selectedCheckbox - ${filters}`)
-            /* console.log(`values - ${values}`) */
             if (!isFirstFilter) {
                 url += `%20${andOrOr}%20search(${key}%2C%20%22${stringValues}%22)`;  
             } else {
@@ -81,15 +46,6 @@ const generateURL = (group, limit, selectedFilter) => {
 
     return url;
 }
-
-
-
-
-
-
-
-
-
 
     // Fetch data from an external API based on the provided parameters.
     // group: Grouping parameter for data retrieval (null for no grouping).
