@@ -42,10 +42,9 @@ const App = () => {
     getNavData();
 
     setAnimate(true);
-    // Clear the animation class after the animation duration (1s)
     const timeoutId = setTimeout(() => {
       setAnimate(false);
-    }, 1000); // 1000ms = 1s
+    }, 1000);
 
     // Clean up the timeout to avoid memory leaks
     return () => clearTimeout(timeoutId);

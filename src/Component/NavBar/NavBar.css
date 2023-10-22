@@ -1,3 +1,8 @@
+.navBar { 
+    background-color: gainsboro;
+    width: 100%;
+}
+
 ul {
     width: max-content;
     padding-right: 15px;
@@ -19,6 +24,16 @@ li {
     flex-direction: row;
 }
 
+.navbar-nav ul {
+    background-color: gainsboro;
+}
+
 .navbar-nav button {
     position: relative;
+    background-color: #f72c2c;
+    transition: background-color 0.5s;
+}
+
+.navbar-nav button:hover {
+    background-color: #d10000;
 }
