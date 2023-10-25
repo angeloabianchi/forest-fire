@@ -13,7 +13,7 @@ import { GetData } from './Component/GetData/GetData';
 
 const App = () => {
 
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({});
   const [nivels, setNivels] = useState();
   const [currentlySituations, setCurrentlySituations] = useState();
   const [probableCauses, setProbableCauses] = useState();
@@ -21,6 +21,18 @@ const App = () => {
   const group_by = ['causa_probable', 'provincia', 'situacion_actual', 'nivel_maximo_alcanzado'];
   const [activeTab, setActiveTab] = useState('Table');
   const [animate, setAnimate] = useState(true);
+  /* const [filterStorage, setFilterStorage] = useState(); */
+
+
+
+  /* const saveSelectedFiltersToLocalStorage = () => {
+    console.log(`selected filters - ${JSON.stringify(selectedFilters)}`)
+    localStorage.setItem('selectedFilters', selectedFilters);
+    setFilterStorage(localStorage.selectedFilters);
+    console.log(`filterStorage - ${JSON.stringify(filterStorage)}`)
+    console.log(`localStorage - ${JSON.stringify(localStorage)}`)
+  }; */
+
 
   useEffect(() => {
     const getNavData = async () => {
@@ -51,6 +63,8 @@ const App = () => {
 
 }, [activeTab])
 
+  /* console.log(`selectedFilters - ${JSON.stringify(selectedFilters)}`) */
+
   return(
     <div className="App">
       <div className="App-header">
@@ -64,6 +78,7 @@ const App = () => {
           provincias={provincias}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          /* saveSelectedFiltersToLocalStorage={saveSelectedFiltersToLocalStorage} */
           />
         </header>
       </div>
@@ -74,7 +89,17 @@ const App = () => {
             {activeTab === 'Map' ? (
               <div className={animate ? 'display' : ''}><Map /></div>
             ) : (
-              <div className={animate ? 'display' : ''}><Table selectedFilters={selectedFilters} /></div>
+              <div>
+                <div className='storageFilters'>
+                  {/* <ul>
+                    {filterStorage && filterStorage.map((filter) => (
+                      <li>{JSON.stringify(filter)}</li>
+                    ))}
+                  </ul> */}
+                </div>              
+                <div className={animate ? 'display' : ''}><Table selectedFilters={selectedFilters} /></div>
+
+              </div>
             )}
             </div>
         </main>

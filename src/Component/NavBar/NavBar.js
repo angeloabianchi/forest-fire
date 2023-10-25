@@ -5,22 +5,70 @@ import React from 'react';
 import './NavBar.css';
 
 
-const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituations, probableCauses, provincias, activeTab, setActiveTab}) => {
+const NavBar = ({ selectedFilters, 
+    setSelectedFilters, 
+    nivels, 
+    currentlySituations, 
+    probableCauses, 
+    provincias, 
+    activeTab, 
+    setActiveTab
+    /* saveSelectedFiltersToLocalStorage */ }) => {
 
 
     // Add or remove the selected filter based on the checkbox state.
-    const handleCheckboxChange = (selectedCheckbox) => {
-        const existingFilterIndex = selectedFilters.findIndex(filter => filter.selectedCheckbox === selectedCheckbox);
-    
-        if (existingFilterIndex !== -1) {
-            // Filter already exists, so remove it
-            const updatedFilters = selectedFilters.filter(filter => filter.selectedCheckbox !== selectedCheckbox);
-            setSelectedFilters(updatedFilters);
+    const handleCheckboxChange = ( checkbox ) => {
+
+        const key = Object.keys(checkbox)[0];
+        const value = Object.values(checkbox)[0];
+
+        // If object has same property key
+        if (selectedFilters.hasOwnProperty(key) && selectedFilters[key] !== value) { 
+            // If it's an array
+            if (Array.isArray(selectedFilters[key])) {
+                // If the array contains the value, remove it
+                if (selectedFilters[key].includes(value)) {
+                    const updatedArray = selectedFilters[key].filter((item) => item !== value);
+                    if (updatedArray.length > 1) {
+                         // If array has more than 1 element
+                        setSelectedFilters({ ...selectedFilters, [key]: updatedArray });
+                    } else if (updatedArray.length === 1) {
+                        // If array has 1 element, transform array back into object
+                        setSelectedFilters({
+                            ...selectedFilters,
+                            [key]: updatedArray[0]
+                        })
+                    }
+                } else {
+                    // If array does not contain the value, add new value
+                    setSelectedFilters({
+                        ...selectedFilters,
+                        [key]: [...selectedFilters[key], value],
+                      });
+                }
+                
+            } else {
+                // If it's not an array, convert it to an array and add the new value
+                setSelectedFilters({
+                    ...selectedFilters,
+                    [key]: [selectedFilters[key], value],
+                });
+            }
+
+        } else if (selectedFilters[key] === value) {
+            // If object contains value, remove the key and value from object.
+            const { [key]: deletedKey, ...rest } = selectedFilters;
+            setSelectedFilters({ ...rest });
         } else {
-            // Filter doesn't exist, so add it
-            setSelectedFilters([...selectedFilters, { selectedCheckbox }]);
+            // If the key doesn't exist, add it with the value
+            setSelectedFilters({
+                ...selectedFilters,
+                [key]: value,
+            });
         }
+
     };
+    
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -35,6 +83,9 @@ const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituatio
                 </button>
                 <div class="collapse navbar-collapse" className='navBar'>
                     <ul class="navbar-nav">
+                        {/* <li class="nav-item dropdown-center">
+                            <button class="btn nav-item" onClick={saveSelectedFiltersToLocalStorage}>Save Filters</button>
+                        </li> */}
                         <li class="nav-item dropdown-center">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Nivel Maximo Alcanzado
@@ -46,7 +97,7 @@ const NavBar = ({ selectedFilters, setSelectedFilters, nivels, currentlySituatio
                                             <input class="form-check-input" type="checkbox" 
                                             value={nivel.nivel_maximo_alcanzado} 
                                             id={nivel.nivel_maximo_alcanzado} 
-                                            onChange={() => handleCheckboxChange(nivel)}/>
+                                            onChange={() => handleCheckboxChange({'nivel_maximo_alcanzado': nivel.nivel_maximo_alcanzado})}/>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 {nivel.nivel_maximo_alcanzado}
                                             </label>
